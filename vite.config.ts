@@ -10,4 +10,5 @@ export default defineConfig({
       },
     }),
   ],
+  base: '/f1-data/'
 })
