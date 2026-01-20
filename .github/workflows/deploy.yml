@@ -35,13 +35,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
-    permissions:
-      pages: write
-      contents: write
-      id-token: write
-      actions: read
+    if: github.ref == 'refs/heads/master'
 
     environment:
       name: github-pages
