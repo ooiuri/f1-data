@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 // TODO: Google Example of how to GET Wikipedia Image, needs to turn into React Query + Hooks
 
