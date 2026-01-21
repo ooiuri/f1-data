@@ -22,9 +22,9 @@ const DriversPage = () => {
       ) : (
         <>
           <InfoCard title={'Drivers of ' + currentSeason} />
-          <Masonry columns={4} spacing={2}>
+          <Masonry columns={{ xs: 1, sm: 3, md: 4 }} spacing={2}>
             {drivers.data.map((driver) => (
-              <Suspense fallback={<Skeleton width={150} height={150} />}>
+              <Suspense key={driver.code} fallback={<Skeleton width={150} height={150} />}>
                 <DriverCard driver={driver} key={driver.code} />
               </Suspense>
             ))}

@@ -8,6 +8,7 @@ export const Container = styled('div')`
     align-items: center;
     width: 100%;
     gap: 2rem;
+    padding: 1rem;
 `;
 
 export const CustomNavLink = styled(NavLink)`

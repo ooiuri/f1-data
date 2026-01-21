@@ -10,6 +10,7 @@ export const Container = styled('div')`
   background-repeat: no-repeat;
   transition: all 0.2 ease;
 
+  padding: 1rem;
   padding-top: 5rem;
 `;
 

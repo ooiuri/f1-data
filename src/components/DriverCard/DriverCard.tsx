@@ -9,7 +9,7 @@ interface IDriverCard {
 
 const DriverCard = ({ driver }: IDriverCard) => {
   return (
-    <Box sx={{ minWidth: 275 }}>
+    <Box sx={{ minWidth: 200 }}>
       <Card variant="outlined">
         <CardContent>
           <Typography
