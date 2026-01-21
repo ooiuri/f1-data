@@ -1,75 +1,59 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🏎️ Formula Ap1 
 
-Currently, two official plugins are available:
+**Acesse o projeto:** [https://ooiuri.github.io/f1-data/](https://ooiuri.github.io/f1-data/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<img width="1276" height="873" alt="image" src="https://github.com/user-attachments/assets/64b3437b-63be-4cd9-b3bb-de45667a21b5" />
 
-## React Compiler
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+A Aplicação permite visualizar dados históricos da formula 1, através da API Ergast, trazendo as temporadas e detalhes sobre corridas e pilotos em cada ano. Para complementar o projeto, também exibimos a imagem dos pilotos utilizando informações disponíveis na Wikipedia. 
 
-Note: This will impact Vite dev & build performances.
 
-## Expanding the ESLint configuration
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Tecnologias Utilizadas
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- [React 19](https://react.dev/) + [TypeScript](https://www.typescriptlang.org/)
+- [Material UI (MUI)](https://mui.com/)
+- [TanStack Query (React Query) v5](https://tanstack.com/query/latest)
+-  [React Router v7](https://reactrouter.com/)
+- [Jest](https://jestjs.io/), [React Testing Library](https://testing-library.com/) e [Nock](https://github.com/nock/nock)
+-  [Axios](https://axios-http.com/)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Como rodar o projeto localmente
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+1. **Clone o repositório:**
+```bash
+   git clone https://github.com/ooiuri/f1-data.git
+   cd f1-data
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+2. **Instale as dependências:**
+```bash
+    npm install
 ```
+3. **Inicie o servidor de desenvolvimento:**
+```bash
+    npm run dev
+```
+
+4. Acesse no navegador:
+
+    http://localhost:5173/f1-data/
+
+
+##  Testes
+
+```
+# Rodar todos os testes
+npm test
+
+# Rodar testes em modo watch
+npm test -- --watch
+```
+
+> Obs.: durante a instalação do nock, a fim de interceptar as requisições, foram necessárias algumas configurações de mock no jest.globals.ts e jest.setup.ts. Por esse motivo, ao fazer a redeclaração do MessageChannel para ser acessível dentro do contexto do jest, alguns testes não estão conseguindo comunicar o seu encerramento, no entanto, estão funcionando e testando as features corretamente.
+ 
+
+## Autor
+
+Desenvolvido por [**Iuri Reis**](https://github.com/ooiuri)
