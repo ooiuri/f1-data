@@ -2,7 +2,7 @@ import { useQueries } from '@tanstack/react-query';
 import {
   // getDriversStanding,
   getRaces,
-} from '../services/formulaData';
+} from '../services/formula.service';
 
 export const getRaceQuery = (season: string, enabled: boolean) => ({
   queryKey: ['races', season],

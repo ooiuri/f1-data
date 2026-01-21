@@ -1,7 +1,9 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 import Grid from '@mui/material/Grid';
 import {
+  CircularProgress,
   FormControl,
+  InputAdornment,
   InputLabel,
   MenuItem,
   Select,
@@ -14,20 +16,13 @@ import { useSeasonsInfinityQuery } from '../../queries/seasons.query';
 import MenuComponent from '../../components/Menu/Menu';
 import { Outlet, useSearchParams } from 'react-router';
 import SeasonContext from '../../contexts/SeasonContext';
-import Season from '../../models/Season';
 import InfoCard from '../../components/InfoCard/InfoCard';
 
 const MENU_MAX_HEIGHT = 250;
 
 export default function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { currentSeason, setCurrentSeason, setSeasons, seasons } =
-    useContext(SeasonContext);
-  const handleChangeSeason = (event: SelectChangeEvent) => {
-    const value = event.target.value;
-    setSearchParams({ season: value });
-    setCurrentSeason(value);
-  };
+  const { currentSeason, setCurrentSeason } = useContext(SeasonContext);
 
   useEffect(() => {
     const seasonParam = searchParams.get('season');
@@ -45,35 +40,27 @@ export default function HomePage() {
     isFetchingNextPage,
   } = useSeasonsInfinityQuery();
 
-  useEffect(() => {
-    if (!seasonsData) return;
-    const flatMap = seasonsData.pages
-    .flatMap((item) => item?.data)
-    .filter((season): season is Season => season !== undefined);
-    if (flatMap.length) {
-      setSeasons(flatMap);
-    }
+  const allSeasons = useMemo(() => {
+    if (!seasonsData) return [];
+    return seasonsData.pages.flatMap((page) => page?.data ?? []);
   }, [seasonsData]);
 
-  function loadMoreItems(event: any) {
+  const handleScroll = (event: React.UIEvent<HTMLUListElement>) => {
+    const listboxNode = event.currentTarget;
     if (
-      event.target.scrollTop ===
-      event.target.scrollHeight - MENU_MAX_HEIGHT
+      listboxNode.scrollTop + listboxNode.clientHeight >= 
+      listboxNode.scrollHeight - 5
     ) {
-      if (!isFetching && !isFetchingNextPage && hasNextPage) {
+      if (hasNextPage && !isFetchingNextPage) {
         fetchNextPage();
       }
     }
-  }
+  };
 
-  const MenuProps = {
-    PaperProps: {
-      style: {
-        maxHeight: MENU_MAX_HEIGHT,
-        width: 250,
-      },
-      onScroll: loadMoreItems,
-    },
+  const handleChangeSeason = (event: SelectChangeEvent) => {
+    const value = event.target.value;
+    setSearchParams({ season: value });
+    setCurrentSeason(value);
   };
 
   return (
@@ -91,14 +78,26 @@ export default function HomePage() {
             value={currentSeason}
             label="season"
             onChange={handleChangeSeason}
-            MenuProps={MenuProps}
+            MenuProps={{
+              PaperProps: {
+                style: {
+                  maxHeight: MENU_MAX_HEIGHT,
+                  width: 250,
+                },
+                onScroll: handleScroll,
+              },
+            }}
+            endAdornment={
+              isFetching || isFetchingNextPage ? (
+                <InputAdornment position="end" sx={{ marginRight: '2rem' }}>
+                  <CircularProgress color="inherit" size={20} />
+                </InputAdornment>
+              ) : null
+            }
           >
-            {!!seasons &&
-              seasons.map((seasonItem) => (
-                <MenuItem value={seasonItem.season}>
-                  {seasonItem.season}
-                </MenuItem>
-              ))}
+            {allSeasons.map((seasonItem) => (
+              <MenuItem value={seasonItem.season}>{seasonItem.season}</MenuItem>
+            ))}
             {isFetchingNextPage && <MenuItem disabled>Loading...</MenuItem>}
           </Select>
         </FormControl>

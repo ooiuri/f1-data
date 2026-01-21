@@ -15,15 +15,21 @@ const DriversPage = () => {
       {!currentSeason ? (
         <InfoCard title="Please, select a season" />
       ) : drivers.isPending || !drivers.data ? (
-        <Skeleton>Loading</Skeleton>
+        <>
+          <InfoCard title="Loading drivers data" />
+          <Skeleton width={150} height={150}></Skeleton>
+        </>
       ) : (
-        <Masonry columns={4} spacing={2}>
-          {drivers.data.map((driver) => (
-            <Suspense fallback={<Skeleton width={150} height={150} />}>
-              <DriverCard driver={driver} key={driver.code} />
-            </Suspense>
-          ))}
-        </Masonry>
+        <>
+          <InfoCard title={'Drivers of ' + currentSeason} />
+          <Masonry columns={4} spacing={2}>
+            {drivers.data.map((driver) => (
+              <Suspense fallback={<Skeleton width={150} height={150} />}>
+                <DriverCard driver={driver} key={driver.code} />
+              </Suspense>
+            ))}
+          </Masonry>
+        </>
       )}
     </Box>
   );

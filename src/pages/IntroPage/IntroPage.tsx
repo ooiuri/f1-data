@@ -3,7 +3,7 @@ import * as S from './styles';
 
 const IntroPage = () => {
   return (
-    <S.Container>
+    <S.Container data-testid="intro-container">
       <Typography variant="h6" component="div">
         Welcome to Formula Ap1
       </Typography>

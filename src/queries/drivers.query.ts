@@ -1,5 +1,5 @@
 import { useQueries } from '@tanstack/react-query';
-import { getDrivers } from '../services/formulaData';
+import { getDrivers } from '../services/formula.service';
 
 export const getDriversQuery = (season: string, enabled: boolean) => ({
   queryKey: ['drivers', season],

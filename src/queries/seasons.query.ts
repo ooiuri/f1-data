@@ -1,5 +1,5 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { getSeasons } from '../services/formulaData';
+import { getSeasons } from '../services/formula.service';
 
 export const useSeasonsInfinityQuery = () => {
   return useInfiniteQuery({

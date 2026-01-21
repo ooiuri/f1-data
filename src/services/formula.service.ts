@@ -97,7 +97,6 @@ export const getDriversStanding = async ({
       method: 'get',
       url: `/${season}/driverstandings/`,
     });
-    console.log('res: ', result)
     const data =
       result?.data?.MRData?.StandingsTable?.StandingsLists[0]?.DriverStandings?.map(
         (item: any) => DriverStanding.fromJson(item)
