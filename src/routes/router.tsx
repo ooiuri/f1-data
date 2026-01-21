@@ -1,6 +1,6 @@
 import {
   Route,
-  createBrowserRouter,
+  createHashRouter,
   createRoutesFromElements,
 } from 'react-router';
 import Root from './root';
@@ -10,7 +10,7 @@ import IntroPage from '../pages/IntroPage/IntroPage';
 import RacesPage from '../pages/RacesPage/RacesPage';
 import DriversPage from '../pages/DriversPage/DriversPage';
 
-const router = createBrowserRouter(
+const router = createHashRouter(
   createRoutesFromElements(
     <Route path="/" element={<Root />} errorElement={<ErrorPage />}>
       <Route errorElement={<ErrorPage />}>
@@ -23,7 +23,7 @@ const router = createBrowserRouter(
         </Route>
       </Route>
     </Route>
-  )
+  ),
 );
 
 export default router;
