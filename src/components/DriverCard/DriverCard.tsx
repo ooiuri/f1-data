@@ -26,7 +26,11 @@ const DriverCard = ({ driver }: IDriverCard) => {
           </Typography>
           <Suspense
             fallback={
-              <Skeleton variant="rectangular" width={200} height={200} />
+              <Skeleton
+                variant="rectangular"
+                width="100%"
+                sx={{ aspectRatio: '1/1', borderRadius: 1 }}
+              />
             }
           >
             <WikipediaImageLoader articleUrl={driver.url} />

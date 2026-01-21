@@ -11,7 +11,7 @@ const WikipediaImageLoader = ({ articleUrl }: { articleUrl: string }) => {
           height: 200,
           width: 200,
           display: 'flex',
-          alignItems: 'center'
+          alignItems: 'center',
         }}
       >
         <Typography variant="caption" textAlign="center">
@@ -23,11 +23,29 @@ const WikipediaImageLoader = ({ articleUrl }: { articleUrl: string }) => {
 
   return (
     <Box
-      component="img"
-      src={imageUrl}
-      sx={{ width: 200, height: 'auto', borderRadius: 1 }}
-      alt='Wikipedia Image of Driver'
-    />
+      sx={{
+        width: '100%',
+        aspectRatio: '1 / 1',
+        minHeight: 200,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden',
+        borderRadius: 1,
+        bgcolor: 'grey.100',
+      }}
+    >
+      <Box
+        component="img"
+        src={imageUrl}
+        alt="Wikipedia Image of Driver"
+        sx={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        }}
+      />
+    </Box>
   );
 };
 
