@@ -11,7 +11,7 @@ const DriversPage = () => {
 
   const [drivers] = useGetDriversQueries(currentSeason, !!currentSeason);
   return (
-    <Box sx={{ minWidth: 275, width: '100%' }}>
+    <Box sx={{ minWidth: 275, width: '100%', maxWidth: 1350 }}>
       {!currentSeason ? (
         <InfoCard title="Please, select a season" />
       ) : drivers.isPending || !drivers.data ? (
