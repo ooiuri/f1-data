@@ -152,6 +152,7 @@ describe('DriversPage Integration', () => {
   });
 
   it('Should handle when no image is found', async () => {
+    mockSeasons();
     mockDriversSeason(mockSeason);
     mockWikiNoImage('Max_Verstappen');
     mockWikiNoImage('Lewis_Hamilton');
@@ -171,6 +172,7 @@ describe('DriversPage Integration', () => {
   });
 
   it('Should handle 500 from Wikipedia', async () => {
+    mockSeasons();
     mockDriversSeason(mockSeason);
     nock('https://en.wikipedia.org').get(/.*/).reply(500);
 
